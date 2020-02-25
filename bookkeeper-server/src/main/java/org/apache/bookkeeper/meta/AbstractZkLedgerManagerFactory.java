@@ -48,7 +48,7 @@ public abstract class AbstractZkLedgerManagerFactory implements LedgerManagerFac
             String ledgersRootPath = ZKMetadataDriverBase.resolveZkLedgersRootPath(conf);
             List<String> children = zk.getChildren(ledgersRootPath, false);
             for (String child : children) {
-                if (!AbstractZkLedgerManager.isSpecialZnode(child) && ledgerManager.isLedgerParentNode(child)) {
+                if (!AbstractZkLedgerManager.isClusterMetadataZnode(child)) {
                     ZKUtil.deleteRecursive(zk, ledgersRootPath + "/" + child);
                 }
             }

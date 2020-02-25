@@ -585,6 +585,21 @@ public abstract class AbstractZkLedgerManager implements LedgerManager, Watcher 
             || znode.startsWith(ZkLedgerIdGenerator.LEDGER_ID_GEN_PREFIX);
     }
 
+
+    /**
+     * Whether znode stores metadata information for the cluster
+     *
+     * @param znode
+     *          Znode Name
+     * @return true  if the znode stores cluster-level information otherwise false
+     */
+    public static boolean isClusterMetadataZnode(String znode) {
+        return BookKeeperConstants.AVAILABLE_NODE.equals(znode)
+                || BookKeeperConstants.COOKIE_NODE.equals(znode)
+                || BookKeeperConstants.LAYOUT_ZNODE.equals(znode)
+                || BookKeeperConstants.INSTANCEID.equals(znode);
+    }
+
     /**
      * regex expression for name of top level parent znode for ledgers (in
      * HierarchicalLedgerManager) or znode of a ledger (in FlatLedgerManager).
